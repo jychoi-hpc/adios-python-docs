@@ -1,0 +1,787 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API Reference &mdash; Adios Python 1.11.1.post1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Adios Python 1.11.1.post1 documentation" href="index.html"/>
+        <link rel="prev" title="Installation" href="build.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Adios Python
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.11.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#file-class">file class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#var-class">var class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writer-class">writer class</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Adios Python</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/ref.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-reference">
+<span id="ref"></span><h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul class="simple">
+</ul>
+</div>
+<span class="target" id="module-adios"></span><dl class="function">
+<dt id="adios.readvar">
+<code class="descclassname">adios.</code><code class="descname">readvar</code><span class="sig-paren">(</span><em>fname</em>, <em>varname</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.readvar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a variable value from an Adios file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>fname</strong> (<em>str</em>) &#8211; Adios file name</li>
+<li><strong>varname</strong> (<em>str</em>) &#8211; Variable name to retrieve</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">variable value</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">NumPy ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="adios.bpls">
+<code class="descclassname">adios.</code><code class="descname">bpls</code><span class="sig-paren">(</span><em>fname</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.bpls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return meta data of an Adios file as a Python dictionary object.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>fname</strong> (<em>str</em>) &#8211; Adios file name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Adios file meta data</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<div class="section" id="file-class">
+<h2>file class<a class="headerlink" href="#file-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="adios.file">
+<em class="property">class </em><code class="descclassname">adios.</code><code class="descname">file</code><span class="sig-paren">(</span><em>str fname</em>, <em>str method_name='BP'</em>, <em>MPI_Comm comm=MPI_COMM_WORLD</em>, <em>is_stream=False</em>, <em>ADIOS_LOCKMODE lock_mode=ADIOS_LOCKMODE_ALL</em>, <em>float timeout_sec=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.file" title="Permalink to this definition">¶</a></dt>
+<dd><p>file class for Adios file read and write.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fname</strong> (<em>str</em>) &#8211; filename.</li>
+<li><strong>method_name</strong> (<em>str, optional</em>) &#8211; Adios read method (default: &#8216;BP&#8217;).</li>
+<li><strong>comm</strong> (<em>MPI_Comm, optional</em>) &#8211; MPI_comm for parallel read/write (default: MPI_COMM_WORLD).</li>
+<li><strong>is_stream</strong> (<em>bool, optional</em>) &#8211; Set True if use stream reader (default: False).</li>
+<li><strong>lock_mode</strong> (<em>int, optional</em>) &#8211; ADIOS_LOCKMODE for stream reader (default: ADIOS_LOCKMODE_ALL).</li>
+<li><strong>timeout_sec</strong> (<em>float, optional</em>) &#8211; Timeout seconds for stream reader (default: 0.0).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">adios</span> <span class="k">as</span> <span class="nn">ad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s1">&#39;adiosfile.bp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="adios.file.advance">
+<code class="descname">advance</code><span class="sig-paren">(</span><em>self</em>, <em>int last=0</em>, <em>float timeout_sec=0.0</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.file.advance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Advance a timestep for stream reader.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>last</strong> (<em>int, optional</em>) &#8211; last timestep index (default: 0).</li>
+<li><strong>timeout_sec</strong> (<em>float, optional</em>) &#8211; timeout seconds (default: 0.0).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">0 if successful, non-zero otherwise.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">int</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.file.close">
+<code class="descname">close</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.file.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close the open file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.file.dirs">
+<code class="descname">dirs</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.file.dirs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return child dir names</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.file.is_open">
+<code class="descname">is_open</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.file.is_open" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether file is open or closed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.file.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.file.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="adios.file.printself">
+<code class="descname">printself</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.file.printself" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print native ADIOS_FILE structure.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.file.release_step">
+<code class="descname">release_step</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.file.release_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>Release the current step lock and let the writer code to progress</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.attr">
+<code class="descname">attr</code><a class="headerlink" href="#adios.file.attr" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>attr</em> &#8211; object</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.attrs">
+<code class="descname">attrs</code><a class="headerlink" href="#adios.file.attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>attrs</em> &#8211; adios.softdict</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.current_step">
+<code class="descname">current_step</code><a class="headerlink" href="#adios.file.current_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>The current timestep index.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.endianness">
+<code class="descname">endianness</code><a class="headerlink" href="#adios.file.endianness" title="Permalink to this definition">¶</a></dt>
+<dd><p>The endianness of the stored data.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.file_size">
+<code class="descname">file_size</code><a class="headerlink" href="#adios.file.file_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The size of Adios file.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.is_stream">
+<code class="descname">is_stream</code><a class="headerlink" href="#adios.file.is_stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicating reader type; file reader or stream reader</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.last_step">
+<code class="descname">last_step</code><a class="headerlink" href="#adios.file.last_step" title="Permalink to this definition">¶</a></dt>
+<dd><p>The last timestep index.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.name">
+<code class="descname">name</code><a class="headerlink" href="#adios.file.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The filename (or stream name) associated with.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.nattrs">
+<code class="descname">nattrs</code><a class="headerlink" href="#adios.file.nattrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of attributes.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.nvars">
+<code class="descname">nvars</code><a class="headerlink" href="#adios.file.nvars" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of variables.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.var">
+<code class="descname">var</code><a class="headerlink" href="#adios.file.var" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>var</em> &#8211; object</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.vars">
+<code class="descname">vars</code><a class="headerlink" href="#adios.file.vars" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>vars</em> &#8211; adios.softdict</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.file.version">
+<code class="descname">version</code><a class="headerlink" href="#adios.file.version" title="Permalink to this definition">¶</a></dt>
+<dd><p>The version of Adios.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="var-class">
+<h2>var class<a class="headerlink" href="#var-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="adios.var">
+<em class="property">class </em><code class="descclassname">adios.</code><code class="descname">var</code><span class="sig-paren">(</span><em>file file</em>, <em>str name</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adios variable class.</p>
+<p>Unlike attributes whose values are populated on initialization,
+variable&#8217;s values will be returned by explicitly calling read() or
+array access interface ([]).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>file</strong> (<a class="reference internal" href="#adios.file" title="adios.file"><em>file</em></a>) &#8211; Associated file class</li>
+<li><strong>name</strong> (<em>str</em>) &#8211; variable name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Users do not need to create this class manually.</p>
+</div>
+<dl class="method">
+<dt id="adios.var.advance">
+<code class="descname">advance</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.var.advance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update variable information after the stream advanced</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.var.close">
+<code class="descname">close</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.var.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Close and free variable information</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.var.keys">
+<code class="descname">keys</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.var.keys" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="adios.var.printself">
+<code class="descname">printself</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.var.printself" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print native ADIOS_VARINFO structure.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.var.read">
+<code class="descname">read</code><span class="sig-paren">(</span><em>self</em>, <em>tuple offset=()</em>, <em>tuple count=()</em>, <em>tuple scalar=()</em>, <em>from_steps=None</em>, <em>nsteps=None</em>, <em>fill=0</em>, <em>step_scalar=True</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.var.read" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform read.</p>
+<p>Read data from an ADIOS BP file. Subset reading is
+supported. Without any options, this will read out a whole
+data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>offset</strong> (<em>tuple of int, optional</em>) &#8211; offset (default: ())</li>
+<li><strong>count</strong> (<em>tuple of int, optional</em>) &#8211; count (default: ())</li>
+<li><strong>scalar</strong> (<em>tuple of bool, optional</em>) &#8211; scalar (default: ())</li>
+<li><strong>from_steps</strong> (<em>int, optional</em>) &#8211; starting step index (default: None)</li>
+<li><strong>nsteps</strong> (<em>int, optional</em>) &#8211; number of time dimensions (default: None)</li>
+<li><strong>fill</strong> (<em>value, optional</em>) &#8211; default fill value (default: 0)</li>
+<li><strong>step_scalar</strong> (<em>bool, optional</em>) &#8211; add time dim or not (default: True)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">NumPy ndarray</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">IndexError</span></code> &#8211; If dimension is mismatched or out of the boundary.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<p>The following command will read the full data:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">var</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>which is equvalent to</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">var</span><span class="p">[]</span>
+</pre></div>
+</div>
+<p>The following command is for subset reading:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">var</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">offset</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">count</span><span class="o">=</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>which will return an 3x4 array offset by (1,2) in the original
+data. With Numpy&#8217;s array notation, the following command does the same job:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">var</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Similarly, the following two commands are same:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">var</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">var</span><span class="p">[:</span><span class="mi">5</span><span class="p">,</span> <span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.var.read_points">
+<code class="descname">read_points</code><span class="sig-paren">(</span><em>self</em>, <em>tuple points=()</em>, <em>from_steps=None</em>, <em>nsteps=None</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.var.read_points" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform points read.</p>
+<p>Read data from an ADIOS BP file based on the given list of point index.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>points</strong> (<em>tuple of int, optional</em>) &#8211; points index defined by ((o1,o2,...,oN),...) (default: ())</li>
+<li><strong>from_steps</strong> (<em>int, optional</em>) &#8211; starting step index (default: None)</li>
+<li><strong>nsteps</strong> (<em>int, optional</em>) &#8211; number of time dimensions (default: None)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">NumPy 1-D ndarray</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">IndexError</span></code> &#8211; If dimension is mismatched or out of the boundary.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.var.read_writeblock">
+<code class="descname">read_writeblock</code><span class="sig-paren">(</span><em>self</em>, <em>int rank</em>, <em>from_steps=None</em>, <em>nsteps=None</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.var.read_writeblock" title="Permalink to this definition">¶</a></dt>
+<dd><p>Perform block read.</p>
+<p>Read data from an ADIOS BP file based on the rank id.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>rank</strong> (<em>int</em>) &#8211; rank id</li>
+<li><strong>from_steps</strong> (<em>int, optional</em>) &#8211; starting step index (default: None)</li>
+<li><strong>nsteps</strong> (<em>int, optional</em>) &#8211; number of time dimensions (default: None)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">NumPy 1-D ndarray</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><code class="xref py py-exc docutils literal"><span class="pre">IndexError</span></code> &#8211; If dimension is mismatched or out of the boundary.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.var.attrs">
+<code class="descname">attrs</code><a class="headerlink" href="#adios.var.attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attributes associated with the variable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.var.blockinfo">
+<code class="descname">blockinfo</code><a class="headerlink" href="#adios.var.blockinfo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Block information.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.var.dims">
+<code class="descname">dims</code><a class="headerlink" href="#adios.var.dims" title="Permalink to this definition">¶</a></dt>
+<dd><p>The shape of the variable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.var.dtype">
+<code class="descname">dtype</code><a class="headerlink" href="#adios.var.dtype" title="Permalink to this definition">¶</a></dt>
+<dd><p>Variable type as in numpy.dtype.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.var.name">
+<code class="descname">name</code><a class="headerlink" href="#adios.var.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>The variable name.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.var.ndim">
+<code class="descname">ndim</code><a class="headerlink" href="#adios.var.ndim" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of dimensions of the variable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.var.nsteps">
+<code class="descname">nsteps</code><a class="headerlink" href="#adios.var.nsteps" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of time steps of the variable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.var.shape">
+<code class="descname">shape</code><a class="headerlink" href="#adios.var.shape" title="Permalink to this definition">¶</a></dt>
+<dd><p>The shape of the variable.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.var.size">
+<code class="descname">size</code><a class="headerlink" href="#adios.var.size" title="Permalink to this definition">¶</a></dt>
+<dd><p>The number of elements in the array.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.var.varid">
+<code class="descname">varid</code><a class="headerlink" href="#adios.var.varid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal variable id.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="writer-class">
+<h2>writer class<a class="headerlink" href="#writer-class" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="adios.writer">
+<em class="property">class </em><code class="descclassname">adios.</code><code class="descname">writer</code><span class="sig-paren">(</span><em>str fname</em>, <em>bool is_noxml=True</em>, <em>str mode='w'</em>, <em>int stats=adios_stat_default</em>, <em>MPI_Comm comm=MPI_COMM_WORLD</em>, <em>str method='POSIX1'</em>, <em>str method_params=''</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.writer" title="Permalink to this definition">¶</a></dt>
+<dd><p>writer class for Adios write.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fname</strong> (<em>str</em>) &#8211; filename.</li>
+<li><strong>is_noxml</strong> (<em>bool, optional</em>) &#8211; Set True if use noxml APIs (default: True).</li>
+<li><strong>comm</strong> (<em>MPI_Comm, optional</em>) &#8211; MPI_comm for parallel read/write (default: MPI_COMM_WORLD).</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">adios</span> <span class="k">as</span> <span class="nn">ad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="s1">&#39;adiosfile.bp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="adios.writer.close">
+<code class="descname">close</code><span class="sig-paren">(</span><em>self</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.writer.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Write variables and attributes to a file and close the writer.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.writer.declare_group">
+<code class="descname">declare_group</code><span class="sig-paren">(</span><em>self</em>, <em>str gname=None</em>, <em>str method='POSIX1'</em>, <em>str method_params=''</em>, <em>int stats=adios_stat_default</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.writer.declare_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a group associated with the file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>gname</strong> (<em>str</em>) &#8211; group name.</li>
+<li><strong>method</strong> (<em>str, optional</em>) &#8211; Adios write method (default: &#8216;POSIX1&#8217;)</li>
+<li><strong>method_params</strong> (<em>str, optional</em>) &#8211; parameters for the write method (default: &#8216;&#8217;)</li>
+<li><strong>stats</strong> (<em>int, optional</em>) &#8211; statistics (default: &#8216;DEFAULT&#8217;)</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">fw</span><span class="o">.</span><span class="n">declare_group</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;MPI_, method_params=&#39;</span><span class="n">verbose</span><span class="o">=</span><span class="mi">3</span><span class="s1">&#39;)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.writer.define_attr">
+<code class="descname">define_attr</code><span class="sig-paren">(</span><em>self</em>, <em>str attrname</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.writer.define_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define attribute in the file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>attrname</strong> (<em>str</em>) &#8211; attribute name.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.writer.define_dynamic_attr">
+<code class="descname">define_dynamic_attr</code><span class="sig-paren">(</span><em>self</em>, <em>str attrname</em>, <em>str varname</em>, <em>dtype</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.writer.define_dynamic_attr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="adios.writer.define_var">
+<code class="descname">define_var</code><span class="sig-paren">(</span><em>self</em>, <em>str varname</em>, <em>ldim=&lt;???&gt;</em>, <em>gdim=&lt;???&gt;</em>, <em>offset=&lt;???&gt;</em>, <em>transform=None</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.writer.define_var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Define a variable associated with the file.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>varname</strong> (<em>str</em>) &#8211; variable name</li>
+<li><strong>ldim</strong> (<em>tuple, optional</em>) &#8211; local dimension (default: tuple())</li>
+<li><strong>gdim</strong> (<em>tuple, optional</em>) &#8211; global dimension (default: tuple())</li>
+<li><strong>offset</strong> (<em>tuple, optional</em>) &#8211; offset (default: tuple())</li>
+<li><strong>transform</strong> (<em>str</em>) &#8211; transform name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Example:</p>
+<p>Write &#8216;temperature&#8217; variable of size of 2x3 array.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span> <span class="n">fw</span><span class="o">.</span><span class="n">define_var</span> <span class="p">(</span><span class="s1">&#39;temperature&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="adios.writer.set_time_aggregation">
+<code class="descname">set_time_aggregation</code><span class="sig-paren">(</span><em>self</em>, <em>buffer_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#adios.writer.set_time_aggregation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set time-aggregation buffersize.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.writer.attrs">
+<code class="descname">attrs</code><a class="headerlink" href="#adios.writer.attrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of attributes to write.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.writer.fname">
+<code class="descname">fname</code><a class="headerlink" href="#adios.writer.fname" title="Permalink to this definition">¶</a></dt>
+<dd><p>The filename to write.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.writer.gname">
+<code class="descname">gname</code><a class="headerlink" href="#adios.writer.gname" title="Permalink to this definition">¶</a></dt>
+<dd><p>The groupname associated with the file.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.writer.is_noxml">
+<code class="descname">is_noxml</code><a class="headerlink" href="#adios.writer.is_noxml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boolean to indicate using No-XML or not.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.writer.mode">
+<code class="descname">mode</code><a class="headerlink" href="#adios.writer.mode" title="Permalink to this definition">¶</a></dt>
+<dd><p><em>Writing mode</em> &#8211; overwrite or append.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.writer.timeaggregation_buffersize">
+<code class="descname">timeaggregation_buffersize</code><a class="headerlink" href="#adios.writer.timeaggregation_buffersize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get time-aggregation buffersize.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="adios.writer.vars">
+<code class="descname">vars</code><a class="headerlink" href="#adios.writer.vars" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dictionary of variables to write.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="build.html" class="btn btn-neutral" title="Installation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Jong Choi (choij@ornl.gov).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.11.1.post1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Quick Start Guide &mdash; Adios Python 1.11.1.post1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Adios Python 1.11.1.post1 documentation" href="index.html"/>
+        <link rel="next" title="Installation" href="build.html"/>
+        <link rel="prev" title="Adios Python" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Adios Python
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.11.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Quick Start Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#reading-data">Reading data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#attribute">Attribute</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-data">Writing data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#transform">Transform</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="build.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ref.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Adios Python</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Quick Start Guide</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/quick.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="quick-start-guide">
+<span id="quick"></span><h1>Quick Start Guide<a class="headerlink" href="#quick-start-guide" title="Permalink to this headline">¶</a></h1>
+<p>An Adios bp file is a container of variables and attributes, which can
+be either scalars or arrays. With the Adios Python wrapper, one can
+access them as NumPy&#8217;s array.</p>
+<div class="section" id="reading-data">
+<h2>Reading data<a class="headerlink" href="#reading-data" title="Permalink to this headline">¶</a></h2>
+<p>In this quick start guide, we assume we have an Adios bp file (name:
+adios_test.bp) contains the following three variables and one attribute:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ bpls -lva adios_test.bp
+integer  NX                        scalar = 10
+integer  size                      scalar = 2
+double   temperature               {2, 10} = 0 / 19 / 9.5 / 5.76628
+string   /temperature/description  attr   = &quot;Global array written from &#39;size&#39; processes&quot;
+</pre></div>
+</div>
+<p>Let&#8217;s start with importing Adios Python module as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">adios</span> <span class="k">as</span> <span class="nn">ad</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A parallel version of Adios Python module is also available,
+called adios_mpi. We will discuss details later.</p>
+</div>
+<p>Then, open the Adios bp file (adios_test.bp) and briefly check its
+contents:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="s1">&#39;adios_test.bp&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span>
+<span class="go">AdiosFile (path=&#39;adios_test.bp&#39;, nvars=3, var=[&#39;NX&#39;, &#39;temperature&#39;, &#39;size&#39;],</span>
+<span class="go">nattrs=1, attr=[&#39;/temperature/description&#39;], current_step=0, last_step=0, file_size=878)</span>
+</pre></div>
+</div>
+<p>Now let&#8217;s read a scalar variable, &#8216;NX&#8217;. We can access each variable by
+using Python&#8217;s dictionary-style interface:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;NX&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span>
+<span class="go">AdiosVar (varid=0, type=dtype(&#39;int32&#39;), ndim=0, dims=(), nsteps=1)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Adios python wrapper provides convenience to access variables
+as a class member, such as, f.NX, unless the name contains
+a separator (&#8216;/&#8217;) in the middle.</p>
+</div>
+<p>Now v contains only meta data information. To read data from the disk,
+execute the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="go">10</span>
+</pre></div>
+</div>
+<p>Equivalently, we can use Numpy-style interface:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We can combine them all together:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;NX&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>In short, the following commands have the same effect:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;NX&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;NX&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">NX</span><span class="p">[</span><span class="o">...</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">NX</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then, let&#8217;s read a multi-dimensional array, &#8216;temperature&#8217;.</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+<span class="go">array([[  0.,   1.,   2.,   3.,   4.,   5.,   6.,   7.,   8.,   9.],</span>
+<span class="go">       [ 10.,  11.,  12.,  13.,  14.,  15.,  16.,  17.,  18.,  19.]])</span>
+</pre></div>
+</div>
+<p>We can read by slices, for example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+<span class="go">array([[  0.,   1.,   2.,   3.,   4.],</span>
+<span class="go">       [ 10.,  11.,  12.,  13.,  14.]])</span>
+</pre></div>
+</div>
+<p>We can use the most of the NumPy&#8217;s slice syntax.</p>
+</div>
+<div class="section" id="attribute">
+<h2>Attribute<a class="headerlink" href="#attribute" title="Permalink to this headline">¶</a></h2>
+<p>Attribute reading is similar:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">at</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">attr</span><span class="p">[</span><span class="s1">&#39;/temperature/description&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">at</span>
+<span class="go">AdiosAttr (name=&#39;/temperature/description&#39;, dtype=dtype(&#39;S42&#39;),</span>
+<span class="go">value=array(&quot;Global array written from &#39;size&#39; processes&quot;, dtype=&#39;|S42&#39;))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">at</span><span class="o">.</span><span class="n">value</span>
+<span class="go">&quot;Global array written from &#39;size&#39; processes&quot;</span>
+</pre></div>
+</div>
+<p>Unless attribute&#8217;s name is conflict with any variable name in the
+file, we can access attributes through the dictionary-style:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;/temperature/description&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While variables are read by &#8220;read&#8221; function or slice
+interface, attributes are accessed through &#8220;value&#8221; property.</p>
+</div>
+<p>The Adios Python reorganizes the attributes in a tree structure based on the prefix of the name.
+For example, the following commands have the same effect:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+<p>By using the class member notation, the following command is also same:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">value</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="writing-data">
+<h2>Writing data<a class="headerlink" href="#writing-data" title="Permalink to this headline">¶</a></h2>
+<p>Now, we will show how we can create the Adios BP file used in the
+previous section:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ bpls -lva adios_test.bp
+integer  NX                        scalar = 10
+integer  size                      scalar = 2
+double   temperature               {2, 10} = 0 / 19 / 9.5 / 5.76628
+string   /temperature/description  attr   = &quot;Global array written from &#39;size&#39; processes&quot;
+</pre></div>
+</div>
+<p>First, we load necessary modules and prepare our Numpy data to save:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">adios</span> <span class="k">as</span> <span class="nn">ad</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">NX</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">NX</span><span class="o">*</span><span class="n">size</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">size</span><span class="p">,</span> <span class="n">NX</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>I.e., we have two scalar variables (NX and size) and one 2-D array (tt).</p>
+<p>Then, we initialize Adios:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">ad</span><span class="o">.</span><span class="n">init_noxml</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then, we give a file name to create with Adios method:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fw</span> <span class="o">=</span> <span class="n">ad</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">fname</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;POSIX1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>&#8220;POSIX1&#8221; is one of many Adios&#8217;s write methods. Others are &#8220;MPI&#8221;,
+&#8220;MPI_AGGREGATE&#8221;, &#8220;FLEXPATH&#8221;, &#8220;DATASPACES&#8221;, etc. More detailed
+descriptions are in the Adios manual.</p>
+<p>Now, we assign our values:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fw</span><span class="p">[</span><span class="s1">&#39;NX&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">NX</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fw</span><span class="p">[</span><span class="s1">&#39;size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">size</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fw</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">tt</span>
+</pre></div>
+</div>
+<p>To write an attribute, we can do as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fw</span><span class="o">.</span><span class="n">attr</span><span class="p">[</span><span class="s1">&#39;/temperature/description&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Global array written from &#39;size&#39; processes&quot;</span>
+</pre></div>
+</div>
+<p>Finally, we let Adios to write a file by calling &#8220;close&#8221;</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fw</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="transform">
+<h2>Transform<a class="headerlink" href="#transform" title="Permalink to this headline">¶</a></h2>
+<p>Adios provides transform methods for data reduction and compressions, such as ZFP, SZ, zlib, etc. For the full list, use <code class="docutils literal"><span class="pre">`adios_list_methods`</span></code> command.</p>
+<p>For an example, SZ transform method can be set by the following command:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fw</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="s1">&#39;SZ&#39;</span>
+</pre></div>
+</div>
+<p>will compress temperature data with SZ with default parameters.</p>
+<p>Method specific parameters can be set like:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fw</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="s1">&#39;SZ:errorBoundMode=ABS,absErrBound=1E-3&#39;</span>
+</pre></div>
+</div>
+<p>An example of ZFP is as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fw</span><span class="p">[</span><span class="s1">&#39;temperature&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span> <span class="o">=</span> <span class="s1">&#39;zfp:accuracy=0.001&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="build.html" class="btn btn-neutral float-right" title="Installation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Adios Python" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Jong Choi (choij@ornl.gov).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.11.1.post1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
