@@ -1,0 +1,10 @@
+.. _gallery:
+
+Gallery
+=======
+
+.. toctree::
+   :maxdepth: 1
+
+   XGC-mesh-and-field-data
+

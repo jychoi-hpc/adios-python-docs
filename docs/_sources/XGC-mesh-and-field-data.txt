@@ -1,0 +1,125 @@
+
+.. code:: python
+
+    %matplotlib inline
+    import matplotlib.pyplot as plt
+    import matplotlib.tri as tri
+    import numpy as np
+    import adios as ad
+    plt.rcParams['figure.figsize'] = (6, 4)
+    cm = plt.cm.jet
+
+.. code:: python
+
+    subdir = 'totalf_itg_tiny/'
+
+XGC mesh structure
+------------------
+
+XGC mesh file (xgc.mesh.bp) contains the following variables: \* n\_n:
+the number of nodes \* n\_t: the number of cells \* rz: node coodinates
+(shape: {n\_n, 2}) \* nd\_connect\_list: connection list or cell
+definition (shape: {n\_t, 3})
+
+.. code:: python
+
+    with ad.file(subdir + 'xgc.mesh.bp') as f:
+        nnodes = f['n_n'][...]
+        ncells = f['n_t'][...]
+        rz = f['rz'][...]
+        conn = f['nd_connect_list'][...]
+    
+    R = rz[:,0]
+    Z = rz[:,1]
+
+.. code:: python
+
+    plt.plot(R, Z, ',');
+    plt.axis('equal');
+
+
+
+.. image:: XGC-mesh-and-field-data_files/XGC-mesh-and-field-data_4_0.png
+
+
+If we zoom, we can see the unstructued mesh clearly:
+
+.. code:: python
+
+    trimesh = tri.Triangulation(R, Z, conn)
+    plt.triplot(trimesh);
+    plt.xlim([1.05, 1.2])
+    plt.ylim([0.0, 0.2]);
+
+
+
+.. image:: XGC-mesh-and-field-data_files/XGC-mesh-and-field-data_6_0.png
+
+
+XGC field data
+--------------
+
+Let's draw one of XGC field data: dpot in xgc.3d.xxxxx.bp.
+
+The shape of dpot is (n\_n, nphi) where n\_n is the number of grid
+nondes and nphi is the number of planes used in XGC simulation.
+
+.. code:: python
+
+    with ad.file(subdir + 'xgc.3d.08800.bp') as f:
+        dpot = f['dpot'][...,0]
+
+.. code:: python
+
+    plt.scatter(R, Z, c=dpot, marker='.', lw = 0);
+    plt.xlim([1.2, 2.2])
+    plt.ylim([0.0, 0.7]);
+
+
+
+.. image:: XGC-mesh-and-field-data_files/XGC-mesh-and-field-data_9_0.png
+
+
+.. code:: python
+
+    trimesh = tri.Triangulation(R, Z, conn)
+    plt.tricontourf(trimesh, dpot, cmap=cm);
+    plt.axis('equal');
+    plt.colorbar();
+
+
+
+.. image:: XGC-mesh-and-field-data_files/XGC-mesh-and-field-data_10_0.png
+
+
+Let's refine the plot by restricting the dpot range to see more
+turbulent behavior.
+
+.. code:: python
+
+    plt.hist(dpot);
+
+
+
+.. image:: XGC-mesh-and-field-data_files/XGC-mesh-and-field-data_12_0.png
+
+
+.. code:: python
+
+    def plot_dpot(dpot, levels=np.linspace(-20, 20, num=101), title=''):
+        dp = dpot.copy()
+        dp[dpot >= levels[-1]] = levels[-2]
+        dp[dpot <= levels[0]] = levels[0]
+        plt.tricontourf(trimesh, dp, levels, cmap=cm);
+        plt.axis('equal');
+        plt.colorbar();
+        plt.title(title)
+
+.. code:: python
+
+    plot_dpot(dpot)
+
+
+
+.. image:: XGC-mesh-and-field-data_files/XGC-mesh-and-field-data_14_0.png
+
