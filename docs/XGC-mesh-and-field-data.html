@@ -1,0 +1,294 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>XGC mesh structure &mdash; Adios Python 1.11.1.post1 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Adios Python 1.11.1.post1 documentation" href="index.html"/>
+        <link rel="up" title="Gallery" href="gallery.html"/>
+        <link rel="next" title="API Reference" href="ref.html"/>
+        <link rel="prev" title="Gallery" href="gallery.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Adios Python
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.11.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="quick.html">Quick Start Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="build.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="gallery.html">Gallery</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">XGC mesh structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#xgc-field-data">XGC field data</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ref.html">API Reference</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Adios Python</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="gallery.html">Gallery</a> &raquo;</li>
+      
+    <li>XGC mesh structure</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/XGC-mesh-and-field-data.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.tri</span> <span class="k">as</span> <span class="nn">tri</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">adios</span> <span class="k">as</span> <span class="nn">ad</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">jet</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">subdir</span> <span class="o">=</span> <span class="s1">&#39;totalf_itg_tiny/&#39;</span>
+</pre></div>
+</div>
+<div class="section" id="xgc-mesh-structure">
+<h1>XGC mesh structure<a class="headerlink" href="#xgc-mesh-structure" title="Permalink to this headline">¶</a></h1>
+<p>XGC mesh file (xgc.mesh.bp) contains the following variables: * n_n:
+the number of nodes * n_t: the number of cells * rz: node coodinates
+(shape: {n_n, 2}) * nd_connect_list: connection list or cell
+definition (shape: {n_t, 3})</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">ad</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="n">subdir</span> <span class="o">+</span> <span class="s1">&#39;xgc.mesh.bp&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">nnodes</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;n_n&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">ncells</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;n_t&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">rz</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;rz&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;nd_connect_list&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">]</span>
+
+<span class="n">R</span> <span class="o">=</span> <span class="n">rz</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">rz</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="s1">&#39;,&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="_images/XGC-mesh-and-field-data_4_0.png" src="_images/XGC-mesh-and-field-data_4_0.png" />
+<p>If we zoom, we can see the unstructued mesh clearly:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">trimesh</span> <span class="o">=</span> <span class="n">tri</span><span class="o">.</span><span class="n">Triangulation</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">triplot</span><span class="p">(</span><span class="n">trimesh</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">]);</span>
+</pre></div>
+</div>
+<img alt="_images/XGC-mesh-and-field-data_6_0.png" src="_images/XGC-mesh-and-field-data_6_0.png" />
+</div>
+<div class="section" id="xgc-field-data">
+<h1>XGC field data<a class="headerlink" href="#xgc-field-data" title="Permalink to this headline">¶</a></h1>
+<p>Let&#8217;s draw one of XGC field data: dpot in xgc.3d.xxxxx.bp.</p>
+<p>The shape of dpot is (n_n, nphi) where n_n is the number of grid
+nondes and nphi is the number of planes used in XGC simulation.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">ad</span><span class="o">.</span><span class="n">file</span><span class="p">(</span><span class="n">subdir</span> <span class="o">+</span> <span class="s1">&#39;xgc.3d.08800.bp&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">dpot</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s1">&#39;dpot&#39;</span><span class="p">][</span><span class="o">...</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">dpot</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">0</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]);</span>
+</pre></div>
+</div>
+<img alt="_images/XGC-mesh-and-field-data_9_0.png" src="_images/XGC-mesh-and-field-data_9_0.png" />
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">trimesh</span> <span class="o">=</span> <span class="n">tri</span><span class="o">.</span><span class="n">Triangulation</span><span class="p">(</span><span class="n">R</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">conn</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tricontourf</span><span class="p">(</span><span class="n">trimesh</span><span class="p">,</span> <span class="n">dpot</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
+</pre></div>
+</div>
+<img alt="_images/XGC-mesh-and-field-data_10_0.png" src="_images/XGC-mesh-and-field-data_10_0.png" />
+<p>Let&#8217;s refine the plot by restricting the dpot range to see more
+turbulent behavior.</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">dpot</span><span class="p">);</span>
+</pre></div>
+</div>
+<img alt="_images/XGC-mesh-and-field-data_12_0.png" src="_images/XGC-mesh-and-field-data_12_0.png" />
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_dpot</span><span class="p">(</span><span class="n">dpot</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="mi">101</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">):</span>
+    <span class="n">dp</span> <span class="o">=</span> <span class="n">dpot</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">dpot</span> <span class="o">&gt;=</span> <span class="n">levels</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">levels</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">dp</span><span class="p">[</span><span class="n">dpot</span> <span class="o">&lt;=</span> <span class="n">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">levels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tricontourf</span><span class="p">(</span><span class="n">trimesh</span><span class="p">,</span> <span class="n">dp</span><span class="p">,</span> <span class="n">levels</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">);</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">();</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="n">plot_dpot</span><span class="p">(</span><span class="n">dpot</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/XGC-mesh-and-field-data_14_0.png" src="_images/XGC-mesh-and-field-data_14_0.png" />
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ref.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="gallery.html" class="btn btn-neutral" title="Gallery" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Jong Choi (choij@ornl.gov).
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.11.1.post1',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
