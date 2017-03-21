@@ -31,7 +31,7 @@
 
   
     <link rel="top" title="Adios Python 1.11.1.post1 documentation" href="index.html"/>
-        <link rel="next" title="API Reference" href="ref.html"/>
+        <link rel="next" title="Gallery" href="gallery.html"/>
         <link rel="prev" title="Quick Start Guide" href="quick.html"/> 
 
   
@@ -88,10 +88,13 @@
 <li class="toctree-l2"><a class="reference internal" href="#trouble-shooting">Trouble Shooting</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#custom-mpicc-and-mpicxx">Custom MPICC and MPICXX</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#could-not-find-any-downloads-that-satisfy-the-requirement-with-pip">&#8220;Could not find any downloads that satisfy the requirement&#8221; with pip</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#custom-mpi4py-build">Custom MPI4py build</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#build-script-on-titan">Build script on Titan</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="gallery.html">Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ref.html">API Reference</a></li>
 </ul>
 
@@ -200,6 +203,65 @@ $ pip --cert cacert.pem install adios
 </pre></div>
 </div>
 </div>
+<div class="section" id="custom-mpi4py-build">
+<h3>Custom MPI4py build<a class="headerlink" href="#custom-mpi4py-build" title="Permalink to this headline">¶</a></h3>
+<p>You may want to build mpi4py by yourself. The source code is available here[<a class="reference external" href="https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-2.0.0.tar.gz">https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-2.0.0.tar.gz</a>]</p>
+<p>Then, run setup.py as follows:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ python setup.py build_ext --mpicc=cc --mpicxx=CC
+</pre></div>
+</div>
+<p>Install in a cutom location and set PYTHONPATH env:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ PREFIX=/dir/to/install
+$ python setup.py install --prefix=$PREFIX
+$ export PYTHONPATH=$PREFIX/lib/python2.7/site-packages:$PYTHONPATH
+</pre></div>
+</div>
+</div>
+<div class="section" id="build-script-on-titan">
+<h3>Build script on Titan<a class="headerlink" href="#build-script-on-titan" title="Permalink to this headline">¶</a></h3>
+<p>The following script is a reference for building Adios python module on Titan:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>#!/bin/bash -ex
+module unload PrgEnv-cray
+module unload PrgEnv-pgi
+module unload PrgEnv-intel
+module unload PrgEnv-gnu
+module unload python
+module unload python_anaconda
+module unload python_anaconda_mpi4py
+module unload python_anaconda_adios
+
+module load PrgEnv-gnu
+module load python_anaconda
+module load python_anaconda_mpi4py
+module load adios/1.12-devel
+
+git fetch origin
+VER=`git describe --always`
+PVER=1.11.1.post2
+
+PREFIX=$WORLDWORK_CSC143/sw/python_anaconda_adios/$VER
+PIP=`which pip`
+
+[ ! -f cacert.pem ] &amp;&amp; wget http://curl.haxx.se/ca/cacert.pem
+
+$PIP install -I -U \
+    --global-option build_ext \
+    --global-option -lrt --install-option=&quot;--prefix=$PREFIX&quot; \
+    --ignore-installed \
+    --cert cacert.pem \
+    adios==$PVER -v
+
+$PIP install -I -U \
+    --global-option build_ext \
+    --global-option=--mpicc=cc \
+    --global-option=--mpicxx=CC \
+    --global-option -lrt --install-option=&quot;--prefix=$PREFIX&quot; \
+    --ignore-installed \
+    --cert cacert.pem \
+    adios_mpi==$PVER -v
+</pre></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -210,7 +272,7 @@ $ pip --cert cacert.pem install adios
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ref.html" class="btn btn-neutral float-right" title="API Reference" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="gallery.html" class="btn btn-neutral float-right" title="Gallery" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="quick.html" class="btn btn-neutral" title="Quick Start Guide" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
